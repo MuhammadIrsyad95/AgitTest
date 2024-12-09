@@ -120,7 +120,7 @@
                 }
                 loadData();
             });
-            //$("#startDate").trigger("change");
+
             $("#orderTable").DataTable({
                 ajax: {
                     url: "@Url.Action("OrderList", "Home")",
@@ -176,16 +176,10 @@
                             display: true,
                             text: 'Shipping Quantity'
                         }
-                    },
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true,
-                            }
-                        }]
                     }
                 }
             });
+
             chartProduct = new Chart(document.getElementById("chartProduct"), {
                 type: 'bar',
                 data: {
@@ -198,14 +192,14 @@
                         backgroundColor: dynamicColors(),
                         yAxisID: 'y',
                     }, {
-                            data: [],
-                            borderWidth: 1,
-                            borderColor: dynamicColors(),
-                            label: 'Value',
-                            type: 'line',
+                        data: [],
+                        borderWidth: 1,
+                        borderColor: dynamicColors(),
+                        label: 'Value',
+                        type: 'line',
                         backgroundColor: dynamicColors(),
                         yAxisID: 'y1',
-                        }]
+                    }]
                 },
                 options: {
                     responsive: true,
@@ -229,8 +223,6 @@
                             type: 'linear',
                             display: true,
                             position: 'right',
-
-                            // grid line settings
                             grid: {
                                 drawOnChartArea: false, // only want the grid lines for one axis to show up
                             },
@@ -238,8 +230,10 @@
                     }
                 }
             });
+
             loadData();
         });
+
         function loadData() {
             window.setTimeout(function () {
                 $("#liveToast").toast("show");
@@ -249,7 +243,7 @@
                 formData.append("start", $("#startDate").val());
                 formData.append("end", $("#endDate").val());
                 $.ajax({
-                    url: "@Url.Action("ShipReport", "Home")",
+                    url: "@Url.Action("ShipCity", "Home")",
                     type: "POST",
                     cache: false,
                     data: formData,
@@ -269,6 +263,7 @@
                         }
                     }
                 });
+
                 $.ajax({
                     url: "@Url.Action("Sales", "Home")",
                     type: "POST",
